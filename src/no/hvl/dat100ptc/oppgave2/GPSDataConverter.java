@@ -19,20 +19,33 @@ public class GPSDataConverter {
 		
 		// TODO
 		// OPPGAVE - START
-		
-		throw new UnsupportedOperationException(TODO.method());
 
+		hr = Integer.parseInt(timestr.substring(TIME_STARTINDEX,13));
+		min = Integer.parseInt(timestr.substring(14,16));
+		sec = Integer.parseInt(timestr.substring(17,19));
+		
+		secs = (hr * 60 * 60) + (min * 60) + sec;
+	
 		// OPPGAVE - SLUTT
 		
+		return secs;
 	}
 
 	public static GPSPoint convert(String timeStr, String latitudeStr, String longitudeStr, String elevationStr) {
 
-		GPSPoint gpspoint;
-
+		// her returneres et nytt gpspoint, og string blir konvertert til desimaler
 		// TODO - START ;
 		
-		throw new UnsupportedOperationException(TODO.method());
+		GPSPoint gpspoint = new GPSPoint (
+				
+				toSeconds(timeStr),
+				Double.parseDouble(latitudeStr),
+				Double.parseDouble(longitudeStr),
+				Double.parseDouble(elevationStr)
+				
+				);
+		
+		return gpspoint;
 
 		// OPPGAVE - SLUTT ;
 	    
