@@ -126,26 +126,42 @@ public class GPSUtils {
 
 	public static String formatTime(int secs) {
 
-		String timestr;
 		String TIMESEP = ":";
-
-		// TODO - START
-
+		String timestr = " ";
 		
-		 
-		// TODO - SLUTT
+		// TODO - START
+		
+		int hr = secs/60/60;
+		int min = (secs/60) % 60;
+		int sec = secs%60;
+		timestr += (" " + String.format("%02d",hr) + TIMESEP + String.format("%02d",min) + TIMESEP + String.format("%02d",sec));
 
+		// TODO - SLUTT
+		
+		return timestr;
+		
 	}
 	private static int TEXTWIDTH = 10;
 
 	public static String formatDouble(double d) {
 
-		String str;
 
 		// TODO - START
+		
+		String mellomrom ="";
 
-		throw new UnsupportedOperationException(TODO.method());
-
+		String s = String.format("%.2f",d);
+		s = s.replace(",",".");
+		int lengde = TEXTWIDTH - s.length();
+		
+		int i = 0;
+		while(i < lengde) {
+			mellomrom += " "; 
+			i++;
+		}
+		
+		return mellomrom + s; 
+		
 		// TODO - SLUTT
 		
 	}
