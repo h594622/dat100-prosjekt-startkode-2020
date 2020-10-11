@@ -33,7 +33,12 @@ public class GPSComputer {
 
 		// TODO - START
 
-		throw new UnsupportedOperationException(TODO.method());
+		for (int i = 0; i < gpspoints.length-1; i++) {
+			distance += GPSUtils.distance(gpspoints[i], gpspoints[i+1]);
+		}
+		
+		return distance;
+	
 
 		// TODO - SLUTT
 
@@ -46,7 +51,19 @@ public class GPSComputer {
 
 		// TODO - START
 
-		throw new UnsupportedOperationException(TODO.method());
+		double [] elevations = new double [gpspoints.length];
+		
+		for (int i = 0; i < gpspoints.length; i++) {
+			elevations[i] = gpspoints[i].getElevation();
+		}
+
+		for(int i = 1; i < gpspoints.length; i++) {
+			if(elevations[i-1] < elevations[i]) {
+				elevation += elevations[i] - elevations[i-1];
+			}
+		}
+
+		return elevation;
 
 		// TODO - SLUTT
 
