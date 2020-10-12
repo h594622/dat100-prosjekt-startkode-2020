@@ -52,12 +52,15 @@ public class ShowRoute extends EasyGraphics {
 
 	// antall y-pixels per breddegrad
 	public double ystep() {
-	
-		double ystep;
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		double maxlat = GPSUtils.findMax(GPSUtils.getLatitudes(gpspoints));
+		double minlat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
+
+		double ystep = MAPYSIZE / (Math.abs(maxlat - minlat)); 
+
+		return ystep;
 
 		// TODO - SLUTT
 		
@@ -67,8 +70,33 @@ public class ShowRoute extends EasyGraphics {
 
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		double minLat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
+		double minLon = GPSUtils.findMin(GPSUtils.getLongitudes(gpspoints));
+
+		double startPunkty = -(gpspoints[0].getLatitude()-minLat)*(ystep())+ybase;
+		double startPunktx = (gpspoints[0].getLongitude()-minLon)*xstep()+MARGIN;
 		
+		for(int i = 0; i < gpspoints.length; i++) {
+			double xMinDiff = gpspoints[i].getLongitude() - minLon;
+			double yMinDiff = gpspoints[i].getLatitude() - minLat;
+			
+			double ykor = (-yMinDiff*ystep()) + ybase;
+			double xkor = (xMinDiff*xstep() + MARGIN);
+			
+			int convy = (int)ykor;
+			int convx = (int)xkor;
+			
+			System.out.println(convy + " " + convx);
+			
+			setColor(255,0,0);
+			fillCircle(convx, convy, 2);
+	
+			drawLine((int)startPunktx, (int)startPunkty, convx, convy);
+			startPunkty = convy;
+			startPunktx = convx;
+		}
+        
+        
 		// TODO - SLUTT
 	}
 
@@ -81,7 +109,21 @@ public class ShowRoute extends EasyGraphics {
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		double WEIGHT = 80.0;
+		
+		String[] str = {
+		"Total Time         :" + GPSUtils.formatTime(gpscomputer.totalTime()),
+		"Total distance     :  " + Math.round(gpscomputer.totalDistance()/1000)*100/100.0 + " km", 
+		"Total elevation    :  " + Math.round(gpscomputer.totalElevation()) +" m",
+		"Max speed          :  " + Math.round(gpscomputer.maxSpeed()) + " km/t",
+		"Average speed      :  " + Math.round(gpscomputer.averageSpeed()) + " km/t",
+		"Energy             :  " + Math.round(gpscomputer.totalKcal(WEIGHT)) + " kcal"
+		};
+	
+		
+		for (int i=0; i < str.length; i++) {
+		drawString(str[i], MARGIN, MARGIN+20*i);
+		}
 		
 		// TODO - SLUTT;
 	}

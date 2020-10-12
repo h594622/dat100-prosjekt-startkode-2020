@@ -8,6 +8,8 @@ import no.hvl.dat100ptc.oppgave2.GPSDataConverter;
 import no.hvl.dat100ptc.oppgave2.GPSDataFileReader;
 import no.hvl.dat100ptc.oppgave4.GPSComputer;
 
+import static java.lang.Integer.parseInt;
+
 import javax.swing.JOptionPane;
 
 public class ShowProfile extends EasyGraphics {
@@ -48,10 +50,12 @@ public class ShowProfile extends EasyGraphics {
 		int x = MARGIN,y;
 
 		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
 	
-		// TODO - SLUTT
+		for (int i = 0; i < gpspoints.length; i++) {
+			drawLine(MARGIN + 3 * i, ybase, MARGIN + 3 * i, ybase - (int) gpspoints[i].getElevation());
+		}
+
+			// TODO - SLUTT
 	}
 
 }
