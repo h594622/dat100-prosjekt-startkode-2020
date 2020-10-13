@@ -122,7 +122,7 @@ public class ShowRoute extends EasyGraphics {
 	
 		
 		for (int i=0; i < str.length; i++) {
-		drawString(str[i], MARGIN, MARGIN+20*i);
+			drawString(str[i], MARGIN, MARGIN+20*i);
 		}
 		
 		// TODO - SLUTT;
