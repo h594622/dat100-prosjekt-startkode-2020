@@ -43,6 +43,7 @@ public class GPSComputer {
 		// TODO - SLUTT
 
 	}
+	
 
 	// beregn totale høydemeter (i meter)
 	public double totalElevation() {
@@ -68,6 +69,31 @@ public class GPSComputer {
 		// TODO - SLUTT
 
 	}
+	
+	// beregn stigningsprosent på deler av ruten
+		public double[] climbs() {
+		
+			//Hypotenusen. Meter mellom punkt, og høgdeforskjell mellom to punkt
+	        //gpspoints[].getElevation();
+	        //GPSUtils.distance(gpspoints[i], gpspoints[i+1]);
+
+	        double[] stigningsprosent = new double[gpspoints.length];
+	        double[] elevasjon = new double[gpspoints.length];
+	        double[] lengde = new double[gpspoints.length-1];
+
+	        for(int i = 0; i < gpspoints.length; i++) {
+	            elevasjon[i] = gpspoints[i].getElevation();
+	        }
+	        for(int i = 0; i < gpspoints.length-1; i++) {
+	            lengde[i] = GPSUtils.distance(gpspoints[i], gpspoints[i+1]);
+	        }
+	        for(int i = 0; i < gpspoints.length; i++) {
+	            stigningsprosent[i] = (elevasjon[i]/lengde[i])*100;
+	        }
+
+	        return stigningsprosent;
+		
+		}
 
 	// beregn total tiden for hele turen (i sekunder)
 	public int totalTime() {
